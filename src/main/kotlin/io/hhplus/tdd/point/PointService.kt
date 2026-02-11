@@ -13,11 +13,15 @@ class PointService {
     }
 
     fun chargePoint(userId: Long, amount: Long): UserPoint {
-        return UserPointTable().insertOrUpdate(userId, amount)
+        val userPoint = UserPointTable().insertOrUpdate(userId, amount)
+        PointHistoryTable().insert(userId, amount, TransactionType.CHARGE, userPoint.updateMillis)
+        return userPoint
     }
 
     fun usePoint(userId: Long, amount: Long): UserPoint {
-        return chargePoint(userId, -amount)
+        val userPoint = chargePoint(userId, -amount)
+        PointHistoryTable().insert(userId, -amount, TransactionType.USE, userPoint.updateMillis)
+        return userPoint
     }
 }
 
