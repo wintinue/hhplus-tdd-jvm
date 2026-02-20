@@ -1,14 +1,12 @@
 package io.hhplus.tdd.point
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/point")
-class PointController {
-    private val logger: Logger = LoggerFactory.getLogger(javaClass)
-    private val pointService = PointService()
+class PointController(
+    private var pointService: PointService,
+) {
 
     /**
      * 특정 유저의 포인트 조회
