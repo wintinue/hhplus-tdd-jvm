@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.spring.boot.starter.web)
     annotationProcessor(libs.spring.boot.configuration.processor)
     testImplementation(libs.spring.boot.starter.test)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 // about source and compilation
@@ -32,7 +33,7 @@ java {
 }
 
 with(extensions.getByType(JacocoPluginExtension::class.java)) {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.12"
 }
 
 tasks.withType<KotlinCompile> {
